@@ -1,78 +1,329 @@
-# MERN Stack Integration Assignment
+ MERN Blog Application
+A full-stack blog application built with the MERN stack (MongoDB, Express.js, React.js, Node.js) featuring user authentication, CRUD operations, and a responsive design.
 
-This assignment focuses on building a full-stack MERN (MongoDB, Express.js, React.js, Node.js) application that demonstrates seamless integration between front-end and back-end components.
+🚀 Project Overview
+This is a complete blog platform that allows users to:
 
-## Assignment Overview
+Register and login with secure authentication
 
-You will build a blog application with the following features:
-1. RESTful API with Express.js and MongoDB
-2. React front-end with component architecture
-3. Full CRUD functionality for blog posts
-4. User authentication and authorization
-5. Advanced features like image uploads and comments
+Create, read, update, and delete blog posts
 
-## Project Structure
+Organize posts by categories
 
-```
-mern-blog/
-├── client/                 # React front-end
-│   ├── public/             # Static files
-│   ├── src/                # React source code
+Browse posts with pagination
+
+Enjoy a responsive and user-friendly interface
+
+🛠️ Tech Stack
+Frontend:
+
+React.js 18
+
+React Router DOM
+
+Context API for state management
+
+Axios for API calls
+
+Vite for build tooling
+
+Backend:
+
+Node.js
+
+Express.js
+
+MongoDB with Mongoose
+
+JWT for authentication
+
+bcryptjs for password hashing
+
+express-validator for input validation
+
+📋 Prerequisites
+Before running this application, make sure you have installed:
+
+Node.js (v18 or higher)
+
+MongoDB (local installation or MongoDB Atlas)
+
+npm or yarn package manager
+
+⚡ Quick Setup
+1. Clone the Repository
+bash
+git clone <repository-url>
+cd mern-blog-app
+2. Backend Setup
+bash
+# Navigate to server directory
+cd server
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env
+Edit the .env file:
+
+env
+NODE_ENV=development
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/mern-blog
+JWT_SECRET=your_jwt_secret_key_here_change_this_in_production
+3. Frontend Setup
+bash
+# Navigate to client directory
+cd ../client
+
+# Install dependencies
+npm install
+
+# Set up environment variables
+cp .env.example .env
+Edit the .env file:
+
+env
+VITE_API_BASE_URL=http://localhost:5000/api
+4. Start the Application
+Terminal 1 - Backend:
+
+bash
+cd server
+npm run dev
+Server will run on: http://localhost:5000
+
+Terminal 2 - Frontend:
+
+bash
+cd client
+npm run dev
+Client will run on: http://localhost:3000
+
+🗄️ Database Setup
+The application will automatically create the database when you start the server. Make sure MongoDB is running on your system.
+
+Optional: Seed Sample Data
+bash
+cd server
+node seedData.js
+📚 API Documentation
+Authentication Endpoints
+Method	Endpoint	Description	Body
+POST	/api/auth/register	Register new user	{username, email, password}
+POST	/api/auth/login	Login user	{email, password}
+GET	/api/auth/me	Get current user	Requires Auth Token
+Posts Endpoints
+Method	Endpoint	Description	Auth Required
+GET	/api/posts	Get all posts (paginated)	No
+GET	/api/posts/:id	Get single post	No
+POST	/api/posts	Create new post	Yes
+PUT	/api/posts/:id	Update post	Yes (Author only)
+DELETE	/api/posts/:id	Delete post	Yes (Author only)
+Categories Endpoints
+Method	Endpoint	Description	Auth Required
+GET	/api/categories	Get all categories	No
+POST	/api/categories	Create new category	No
+Request/Response Examples
+Register User:
+
+json
+POST /api/auth/register
+{
+  "username": "john_doe",
+  "email": "john@example.com",
+  "password": "password123"
+}
+
+Response:
+{
+  "_id": "user_id",
+  "username": "john_doe",
+  "email": "john@example.com",
+  "token": "jwt_token"
+}
+Create Post:
+
+json
+POST /api/posts
+Headers: { Authorization: "Bearer jwt_token" }
+{
+  "title": "My First Blog Post",
+  "content": "This is the content of my blog post...",
+  "category": "category_id",
+  "tags": "react, javascript, web-development"
+}
+✨ Features Implemented
+✅ Core Features
+User Authentication (Register, Login, Logout)
+
+JWT-based secure authentication
+
+CRUD Operations for blog posts
+
+Category management
+
+Responsive UI design
+
+Protected routes
+
+✅ User Interface
+Homepage with application overview
+
+Posts listing with pagination
+
+Single post view
+
+Create/Edit post forms
+
+User authentication forms
+
+Dynamic navigation based on auth state
+
+✅ Backend Features
+RESTful API design
+
+Input validation with express-validator
+
+Error handling middleware
+
+Password hashing with bcryptjs
+
+MongoDB relationships (User-Post-Category)
+
+Pagination support
+
+✅ Advanced Features
+Context API for global state management
+
+Custom hooks for API calls
+
+Auto-login on page refresh
+
+Form validation on frontend
+
+Loading states and error handling
+
+Optimistic UI updates
+
+🎯 Application Structure
+text
+mern-blog-app/
+├── client/                 # React frontend
+│   ├── src/
 │   │   ├── components/     # Reusable components
 │   │   ├── pages/          # Page components
 │   │   ├── hooks/          # Custom React hooks
 │   │   ├── services/       # API services
-│   │   ├── context/        # React context providers
-│   │   └── App.jsx         # Main application component
-│   └── package.json        # Client dependencies
-├── server/                 # Express.js back-end
-│   ├── config/             # Configuration files
-│   ├── controllers/        # Route controllers
+│   │   ├── context/        # React Context
+│   │   └── App.jsx         # Main App component
+│   └── package.json
+├── server/                 # Express backend
 │   ├── models/             # Mongoose models
 │   ├── routes/             # API routes
+│   ├── controllers/        # Route controllers
 │   ├── middleware/         # Custom middleware
-│   ├── utils/              # Utility functions
-│   ├── server.js           # Main server file
-│   └── package.json        # Server dependencies
-└── README.md               # Project documentation
-```
+│   └── server.js           # Server entry point
+└── README.md
+🖼️ Application Screenshots
+![alt text](<Screenshot 2025-10-30 020556.png>)
 
-## Getting Started
+Homepage
+Clean header with navigation
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week4-Assignment.md` file
-4. Complete the tasks outlined in the assignment
+Welcome section with call-to-action buttons
 
-## Files Included
+Feature cards highlighting application capabilities
 
-- `Week4-Assignment.md`: Detailed assignment instructions
-- Starter code for both client and server:
-  - Basic project structure
-  - Configuration files
-  - Sample models and components
+Responsive design that works on all devices
 
-## Requirements
+Posts Page
+Grid layout of blog posts
 
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- npm or yarn
-- Git
+Post cards with title, excerpt, and metadata
 
-## Submission
+Pagination controls for navigating through posts
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+"Create Post" button for authenticated users
 
-1. Complete both the client and server portions of the application
-2. Implement all required API endpoints
-3. Create the necessary React components and hooks
-4. Document your API and setup process in the README.md
-5. Include screenshots of your working application
+Authentication Pages
+Clean, centered forms for login and registration
 
-## Resources
+Form validation with error messages
 
-- [MongoDB Documentation](https://docs.mongodb.com/)
-- [Express.js Documentation](https://expressjs.com/)
-- [React Documentation](https://react.dev/)
-- [Node.js Documentation](https://nodejs.org/en/docs/)
-- [Mongoose Documentation](https://mongoosejs.com/docs/) 
+Links to switch between login and register
+
+Post Management
+Rich forms for creating and editing posts
+
+Category selection dropdown
+
+Tag input field
+
+Content textarea with proper formatting
+
+🔧 Environment Variables
+Server (.env)
+env
+NODE_ENV=development
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/mern-blog
+JWT_SECRET=your_secure_jwt_secret
+Client (.env)
+env
+VITE_API_BASE_URL=http://localhost:5000/api
+🚀 Deployment
+Backend Deployment (Heroku/Netlify/Railway)
+Set environment variables in your hosting platform
+
+Deploy the server directory
+
+Ensure MongoDB connection string is set
+
+Frontend Deployment (Netlify/Vercel)
+Build the project: npm run build
+
+Deploy the dist folder
+
+Set environment variables for API URL
+
+🤝 Contributing
+Fork the repository
+
+Create a feature branch: git checkout -b feature/new-feature
+
+Commit your changes: git commit -m 'Add new feature'
+
+Push to the branch: git push origin feature/new-feature
+
+Submit a pull request
+
+📝 License
+This project is licensed under the MIT License.
+
+🆘 Troubleshooting
+Common Issues:
+MongoDB Connection Error
+
+Ensure MongoDB is running locally
+
+Check MONGODB_URI in .env file
+
+CORS Errors
+
+Verify server and client are running on correct ports
+
+Check proxy configuration in vite.config.js
+
+Authentication Issues
+
+Clear browser localStorage
+
+Check JWT secret in server .env
+
+Build Errors
+
+Delete node_modules and run npm install again
+
+Ensure Node.js version is 18+
